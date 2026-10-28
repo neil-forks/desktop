@@ -320,7 +320,7 @@ private func performUpload(
         .isEmpty
     shouldRemoveLocalChunkUpload = chunkUploadCompleted || !hasRemainingChunks
 
-    if nkError.isCancelledError,
+    if nkError.isCancelledError || nkError.hasChunkingCancellationCode,
        cancellation.isCancelled || Task.isCancelled
     {
         return (nil, nil, nil, nil, .cancelled)

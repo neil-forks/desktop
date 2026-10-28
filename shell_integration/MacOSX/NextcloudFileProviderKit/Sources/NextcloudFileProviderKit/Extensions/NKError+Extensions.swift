@@ -11,8 +11,12 @@ extension NKError {
     }
 
     var isCancelledError: Bool {
-        // NKCommon.chunkedFile uses -5 for cancellation during local chunk preparation.
-        errorCode == NSURLErrorCancelled || errorCode == -5
+        errorCode == NSURLErrorCancelled
+    }
+
+    var hasChunkingCancellationCode: Bool {
+        // NextcloudKit also uses this code for empty chunks; confirm cancellation from the operation.
+        errorCode == -5
     }
 
     var isCouldntConnectError: Bool {
